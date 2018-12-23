@@ -84,23 +84,14 @@ class PyPostGUI:
     def make_request(self):
         url = self.url.get()
         req_type = self.req_type.get()
-        # Convert data entry to dictionary
-        data = self.data.get()
-        data_dict = {}
-        if data:
-            data = data.split("; ")
-            for item in data:
-                item = item.split("=")
-                data_dict[item[0]] = item[1]
         headers = self.headers.get()
-        headers_dict = {}
-        # Convert headers entry to dictionary
         if headers:
-            headers = headers.split("; ")
-            for header in headers:
-                header = header.split("=")
-                headers_dict[header[0]] = header[1]
-        self.request = pypost.Request(url, request_type=req_type, data=data_dict, headers=headers_dict)
+            headers = pypost.process_data(headers)
+        data = None
+        if req_type == "POST":
+            data = self.data.get()
+            data = pypost.process_data(data)
+        self.request = pypost.Request(url, request_type=req_type, data=data, headers=headers)
         self.request.fetch()
         # Reformat dictionary as string
         response = pprint.pformat(self.request.response)
