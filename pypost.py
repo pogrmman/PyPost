@@ -90,7 +90,7 @@ class PyPostGUI:
         if data:
             data = data.split("; ")
             for item in data:
-                item = item.split("= ")
+                item = item.split("=")
                 data_dict[item[0]] = item[1]
         headers = self.headers.get()
         headers_dict = {}
@@ -98,7 +98,7 @@ class PyPostGUI:
         if headers:
             headers = headers.split("; ")
             for header in headers:
-                header = header.split("= ")
+                header = header.split("=")
                 headers_dict[header[0]] = header[1]
         self.request = pypost.Request(url, request_type=req_type, data=data_dict, headers=headers_dict)
         self.request.fetch()
