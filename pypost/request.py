@@ -1,4 +1,5 @@
 ### Builtins ###
+import pprint
 import urllib.request
 import json
 
@@ -20,7 +21,11 @@ class Request:
 
     def fetch(self):
         resp = urllib.request.urlopen(self._request)
-        self.response = json.loads(resp.read().decode("ascii"))
+        self.response = resp.read().decode("ascii")
+        try:
+            self.response = json.loads(self.response)
+        except:
+            pass
         
 
     
