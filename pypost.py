@@ -104,5 +104,6 @@ class PyPostGUI:
         
 ### Run GUI ###
 root = Tk()
+root.iconbitmap("icon.ico")
 gui = PyPostGUI(root)
 root.mainloop()
