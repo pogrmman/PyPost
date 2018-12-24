@@ -15,7 +15,8 @@ class PyPostGUI:
         # Set master and title
         self.master = master
         master.title("PyPost REST API Tester " + pypost.VERSION)
-
+        self.master.bind("<Return>", self.make_request)
+        
         # Setup layout
         self.frame = ttk.Frame(master, padding=(10,10,10,10))
         self.frame.grid(row=0, column=0, sticky=N+S+E+W)
@@ -81,7 +82,7 @@ class PyPostGUI:
         self.data_label.grid()
         self.data_entry.grid()
 
-    def make_request(self):
+    def make_request(self, event=None):
         url = self.url.get()
         req_type = self.req_type.get()
         headers = self.headers.get()
